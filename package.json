@@ -1,0 +1,17 @@
+{
+  "name": "@area44/getimagedimensions.js",
+  "description": "Get the list of image file paths with dimensions",
+  "version": "23.5.20",
+  "private": "true",
+  "author": "AREA44",
+  "repository": {
+    "url": "git+https://github.com/ARE44/getImageDimensions.js.git"
+  },
+  "homepage": "https://github.com/ARE44/getImageDimensions.js#readme",
+  "main": "getImageDimensions.js",
+  "license": "MIT",
+  "dependencies": {
+    "image-size": "^1.0.2"
+  },
+  "packageManager": "pnpm@8.5.1"
+}

@@ -1,7 +1,22 @@
-# CRJ - Creat a JSON file list of Images
+# getImageDimensions.js
 
-This code will create a JSON file called `images.json` in the current directory. The JSON file will contain a list of all the image files in the `images` folder. The key of each object in the JSON file will be the name of the image file, and the value will be the path to the image file.
+Get the list of image file paths in the `images` folder with dimensions using Node.js:
+
+## Develop locally
 
 ```sh
-node index.js
+git clone https://github.com/AREA44/getImageDimensions.js
+cd getImageDimensions.js
 ```
+
+Now, copy your images into `images` folder and run:
+
+```sh
+node getImageDimensions.js
+```
+
+A `data-images.json` will be created in the current directory.
+
+## License
+
+Licensed under the [MIT](./LICENSE) license.
