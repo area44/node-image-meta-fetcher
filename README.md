@@ -1,6 +1,6 @@
 # getImageDimensions.js
 
-Get the list of image file paths in the `images` folder with dimensions using Node.js:
+Get the list of image file paths with dimensions using Node.js.
 
 ## Develop locally
 
