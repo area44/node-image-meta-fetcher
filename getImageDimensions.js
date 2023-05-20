@@ -10,7 +10,7 @@ const imageFiles = fs.readdirSync(imagesDir);
 const imageDimensions = imageFiles.map((imageFile) => {
   const dimensions = imageSize(imagesDir + "/" + imageFile);
   return {
-    path: imageFile,
+    src: imageFile,
     width: dimensions.width,
     height: dimensions.height,
   };

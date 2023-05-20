@@ -7,6 +7,7 @@ Get the list of image file paths with dimensions using Node.js.
 ```sh
 git clone https://github.com/AREA44/getImageDimensions.js
 cd getImageDimensions.js
+pnpm install
 ```
 
 Now, copy your images into `images` folder and run:
