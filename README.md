@@ -10,7 +10,7 @@ cd getImageDimensions.js
 pnpm install
 ```
 
-Now, copy your images into `images` folder and run:
+Now, remove example images then copy your images into `images` folder and run:
 
 ```sh
 node getImageDimensions.js
