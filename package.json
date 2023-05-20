@@ -5,9 +5,9 @@
   "private": "true",
   "author": "AREA44",
   "repository": {
-    "url": "git+https://github.com/ARE44/getImageDimensions.js.git"
+    "url": "git+https://github.com/AREA44/getImageDimensions.js.git"
   },
-  "homepage": "https://github.com/ARE44/getImageDimensions.js#readme",
+  "homepage": "https://github.com/AREA44/getImageDimensions.js#readme",
   "main": "getImageDimensions.js",
   "license": "MIT",
   "dependencies": {
