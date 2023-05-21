@@ -1,7 +1,7 @@
 {
   "name": "@area44/getimagedimensions.js",
   "description": "Get the list of image file paths with dimensions",
-  "version": "23.5.20",
+  "version": "23.5.21",
   "private": "true",
   "author": "AREA44",
   "repository": {

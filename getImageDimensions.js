@@ -1,16 +1,18 @@
 const fs = require("fs");
 const imageSize = require("image-size");
 
-const imagesDir = "./images";
-
 // Get the list of image files in the images directory.
+const imagesDir = "./images";
 const imageFiles = fs.readdirSync(imagesDir);
 
 // For each image file, get the dimensions.
+let id = 0;
 const imageDimensions = imageFiles.map((imageFile) => {
   const dimensions = imageSize(imagesDir + "/" + imageFile);
+  id++;
   return {
-    src: imageFile,
+    id: id,
+    imageSrc: imageFile,
     width: dimensions.width,
     height: dimensions.height,
   };
