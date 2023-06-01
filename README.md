@@ -16,7 +16,7 @@ Now, remove example images then copy your images into `images` folder and run:
 node getImages.js
 ```
 
-A `data-images.json` will be created in the current directory.
+A `images.json` will be created in the current directory.
 
 ## License
 
