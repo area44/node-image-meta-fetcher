@@ -1,4 +1,4 @@
-# getImages
+# getImages.js
 
 Get images from a directory.
 
@@ -13,7 +13,7 @@ pnpm install
 Now, remove example images then copy your images into `images` folder and run:
 
 ```sh
-node getImages.js
+node getImages.mjs
 ```
 
 A `images.json` will be created in the current directory.
