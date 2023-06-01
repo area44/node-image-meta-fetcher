@@ -1,19 +1,19 @@
-# getImageDimensions.js
+# getImages
 
-Get the list of image file paths with dimensions using Node.js.
+Get images from a directory.
 
-## Develop locally
+## Usage
 
 ```sh
-git clone https://github.com/AREA44/getImageDimensions.js
-cd getImageDimensions.js
+git clone https://github.com/AREA44/getImages.js
+cd getImages.js
 pnpm install
 ```
 
 Now, remove example images then copy your images into `images` folder and run:
 
 ```sh
-node getImageDimensions.js
+node getImages.js
 ```
 
 A `data-images.json` will be created in the current directory.

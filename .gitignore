@@ -130,5 +130,5 @@ dist
 .pnp.*
 
 # output
-data-images.json
+images.json
 images
