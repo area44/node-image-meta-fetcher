@@ -1,13 +1,13 @@
 {
   "name": "@area44/getimages",
-  "description": "Get images from a directory",
+  "description": "Get all images in a directory",
   "version": "23.6.2",
   "private": "true",
   "author": "AREA44",
   "repository": {
-    "url": "git+https://github.com/AREA44/getImages.js.git"
+    "url": "git+https://github.com/AREA44/node-getImages.git"
   },
-  "homepage": "https://github.com/AREA44/getImages.js#readme",
+  "homepage": "https://github.com/AREA44/node-getImages#readme",
   "license": "MIT",
   "dependencies": {
     "glob": "^10.2.6",
