@@ -1,6 +1,6 @@
 {
   "name": "@area44/getimages",
-  "description": "Get all images in a directory",
+  "description": "Get all images in a directory and write them to a JSON file",
   "version": "23.6.2",
   "private": "true",
   "author": "AREA44",
