@@ -18,7 +18,7 @@ pnpm install
 Now, remove example images then copy your images into `images` folder and run:
 
 ```sh
-node index.js
+node index.mjs
 ```
 
 The `images.json` file will contain an array of objects, where each object represents an image. The objects will have the following properties:

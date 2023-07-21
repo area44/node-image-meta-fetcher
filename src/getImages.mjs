@@ -4,8 +4,8 @@ import { getPlaiceholder } from 'plaiceholder';
 
 export async function getImages(pattern) {
   const images = await Promise.all(
-    glob.sync(pattern).map(async (file) => {
-      const src = file.replace('\\', '/');
+    glob.sync(pattern, { posix: true }).map(async (file) => {
+      const src = file.replace('images/', '');
       const buffer = await fs.readFile(file);
       const {
         metadata: { height, width },
