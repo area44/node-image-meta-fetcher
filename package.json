@@ -9,10 +9,16 @@
   },
   "homepage": "https://github.com/AREA44/node-getImages#readme",
   "license": "MIT",
+  "scripts": {
+    "test": "uvu tests"
+  },
   "dependencies": {
     "glob": "^10.3.3",
     "plaiceholder": "^3.0.0",
     "sharp": "^0.32.4"
+  },
+  "devDependencies": {
+    "uvu": "^0.5.6"
   },
   "engines": {
     "node": ">=18"
