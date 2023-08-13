@@ -1,14 +1,14 @@
 {
   "name": "@area44/getimages",
-  "description": "Get all images in a directory and write them to a JSON file",
   "version": "23.8.4",
   "private": "true",
-  "author": "AREA44",
+  "description": "Get all images in a directory and write them to a JSON file",
+  "homepage": "https://github.com/AREA44/node-getImages#readme",
   "repository": {
     "url": "git+https://github.com/AREA44/node-getImages.git"
   },
-  "homepage": "https://github.com/AREA44/node-getImages#readme",
   "license": "MIT",
+  "author": "AREA44",
   "scripts": {
     "test": "uvu tests"
   },
@@ -20,8 +20,8 @@
   "devDependencies": {
     "uvu": "^0.5.6"
   },
+  "packageManager": "pnpm@8.6.12",
   "engines": {
     "node": ">=18"
-  },
-  "packageManager": "pnpm@8.6.12"
+  }
 }
