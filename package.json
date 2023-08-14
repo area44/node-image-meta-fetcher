@@ -1,11 +1,11 @@
 {
-  "name": "@area44/getimages",
-  "version": "23.8.4",
+  "name": "@area44/image-meta-fetcher",
+  "version": "23.8.15",
   "private": "true",
-  "description": "Get all images in a directory and write them to a JSON file",
-  "homepage": "https://github.com/AREA44/node-getImages#readme",
+  "description": "Get image metadata in a directory",
+  "homepage": "https://github.com/AREA44/node-image-meta-fetcher#readme",
   "repository": {
-    "url": "git+https://github.com/AREA44/node-getImages.git"
+    "url": "git+https://github.com/AREA44/node-image-meta-fetcher.git"
   },
   "license": "MIT",
   "author": "AREA44",

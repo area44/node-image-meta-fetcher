@@ -1,6 +1,6 @@
-# getImages
+# Image Meta Fetcher
 
-This code will get all images from a folder and write them to a JSON file called `images.json`.
+Get image metadata in a directory.
 
 ## Requirements
 
@@ -10,8 +10,8 @@ This code will get all images from a folder and write them to a JSON file called
 ## Getting Started
 
 ```sh
-git clone https://github.com/AREA44/node-getImages
-cd node-getImages
+git clone https://github.com/AREA44/node-image-meta-fetcher
+cd node-image-meta-fetcher
 pnpm install
 ```
 
