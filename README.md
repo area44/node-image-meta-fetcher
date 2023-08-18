@@ -18,10 +18,10 @@ pnpm install
 Now, remove example images then copy your images into `images` folder and run:
 
 ```sh
-node index.mjs
+node examples/ImageMetaFetcher.js
 ```
 
-The `images.json` file will contain an array of objects, where each object represents an image. The objects will have the following properties:
+You'll get an `images.json` in the `examples` directory. This file will contain an array of objects, where each object represents an image. The objects will have the following properties:
 
 - `src`: The path to the image file
 - `width`: The width of the image in pixels

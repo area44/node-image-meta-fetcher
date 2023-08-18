@@ -1,6 +1,6 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
-import { ImageMetaFetcher } from '../src/ImageMetaFetcher.mjs'
+import { ImageMetaFetcher } from '../index.js'
 
 const images = await ImageMetaFetcher('images/*.{jpg,jpeg,png}')
 
