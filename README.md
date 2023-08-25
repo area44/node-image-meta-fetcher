@@ -1,6 +1,6 @@
 # Image Meta Fetcher
 
-Get image metadata in a directory.
+Image Meta Fetcher allows you to fetch metadata for images in a directory. It retrieves information such as the image width, height, and base64 encoded image data.
 
 ## Requirements
 
@@ -15,7 +15,7 @@ cd node-image-meta-fetcher
 pnpm install
 ```
 
-Now, remove example images then copy your images into `images` folder and run:
+After that, remove example images then copy your images into `images` folder and run:
 
 ```sh
 node examples/ImageMetaFetcher.js
@@ -30,4 +30,4 @@ You'll get an `images.json` in the `examples` directory. This file will contain 
 
 ## License
 
-Licensed under the [MIT](./LICENSE) license.
+Licensed under the [MIT License](./LICENSE).
