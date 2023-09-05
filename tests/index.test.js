@@ -2,7 +2,7 @@ import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 import { ImageMetaFetcher } from '../index.js'
 
-const images = await ImageMetaFetcher('images/*.{jpg,jpeg,png}')
+const images = await ImageMetaFetcher('images/*.{jpg,jpeg,png,webp}')
 
 test('should return an array of images', () => {
   assert.type(images, 'object')
