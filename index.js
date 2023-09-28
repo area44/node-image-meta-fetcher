@@ -1,15 +1,17 @@
+import { promises as fs } from 'fs'
 import { glob } from 'glob'
-import sharp from 'sharp'
+import { getPlaiceholder } from 'plaiceholder'
 
 export async function ImageMetaFetcher(pattern) {
   try {
     const files = glob.sync(pattern, { posix: true })
     const imagePromises = files.map(async (file) => {
       const src = file.replace(/^.*[\\\/]/, '')
-      const metadata = await sharp(file).metadata()
-      const { width, height, format } = metadata
-      const buffer = await sharp(file).toBuffer()
-      const base64 = `data:image/${format};base64,${buffer.toString('base64')}`
+      const buffer = await fs.readFile(file)
+      const {
+        metadata: { height, width },
+        base64,
+      } = await getPlaiceholder(buffer)
       return { src, width, height, base64 }
     })
 
