@@ -2,11 +2,6 @@
 
 Image Meta Fetcher allows you to fetch metadata for images in a directory. It retrieves information such as the image width, height, and base64 encoded image data.
 
-## Requirements
-
-- Node.js 18+
-- The [`glob`](https://github.com/isaacs/node-glob) and [`plaiceholder`](https://github.com/joe-bell/plaiceholder) modules
-
 ## Getting Started
 
 ```sh
