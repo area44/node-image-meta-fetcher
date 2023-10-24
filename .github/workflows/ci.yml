@@ -19,15 +19,15 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.nodejs }}
-          cache: npm
+          cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
 
       - name: Install dependencies
         run: pnpm install
