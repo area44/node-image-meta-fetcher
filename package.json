@@ -15,7 +15,7 @@
     "test": "uvu tests"
   },
   "dependencies": {
-    "glob": "^10.3.10",
+    "glob": "^10.3.12",
     "sharp": "^0.33.3"
   },
   "devDependencies": {
@@ -23,6 +23,6 @@
   },
   "packageManager": "pnpm@8.15.5",
   "engines": {
-    "node": ">=20.11.1"
+    "node": ">=20.12.0"
   }
 }
