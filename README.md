@@ -7,13 +7,13 @@ Image Meta Fetcher allows you to fetch metadata for images in a directory. It re
 ```sh
 git clone https://github.com/AREA44/node-image-meta-fetcher
 cd node-image-meta-fetcher
-pnpm install
+bun install
 ```
 
 After that, remove example images then copy your images into `images` folder and run:
 
 ```sh
-node examples/ImageMetaFetcher.js
+bun run examples/ImageMetaFetcher.js
 ```
 
 You'll get an `images.json` in the `examples` directory. This file will contain an array of objects, where each object represents an image. The objects will have the following properties:
