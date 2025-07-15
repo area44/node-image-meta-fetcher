@@ -36,7 +36,7 @@ jobs:
             PACKAGE_MANAGER="yarn"; VERSION="latest"
           elif [[ -f package-lock.json ]]; then
             PACKAGE_MANAGER="npm"; VERSION="latest"
-          elif [[ -f bun.lock || -f bun.lockb ]]; then
+          elif [[ -f bun.lock ]] || [[ -f bun.lockb ]]; then
             PACKAGE_MANAGER="bun"; VERSION="latest"
           elif [[ -f package.json ]]; then
             RAW_PM=$(jq -r '.packageManager // empty' package.json)
