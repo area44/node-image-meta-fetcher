@@ -45,14 +45,16 @@ jobs:
               VERSION="${RAW_PM#*@}"
               [[ "$VERSION" == "$RAW_PM" ]] && VERSION="latest"
             else
-              echo "No lockfile or packageManager found"; exit 1
+              PACKAGE_MANAGER="npm"
+              VERSION="latest"
             fi
           else
-            echo "No lockfile or package.json found"; exit 1
+            PACKAGE_MANAGER="npm"
+            VERSION="latest"
           fi
           echo "PM_NAME=$PACKAGE_MANAGER" >> "$GITHUB_OUTPUT"
           echo "PM_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "Detected package manager: $PACKAGE_MANAGER@$VERSION"
+          echo "::notice::Detected package manager: $PACKAGE_MANAGER@$VERSION"
 
       - name: Setup PNPM
         if: ${{ steps.detect_pm.outputs.PM_NAME == 'pnpm' }}
