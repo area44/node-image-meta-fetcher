@@ -54,7 +54,6 @@ jobs:
           fi
           echo "PM_NAME=$PACKAGE_MANAGER" >> "$GITHUB_OUTPUT"
           echo "PM_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "::notice::Detected package manager: $PACKAGE_MANAGER@$VERSION"
 
       - name: Setup PNPM
         if: ${{ steps.detect_pm.outputs.PM_NAME == 'pnpm' }}
