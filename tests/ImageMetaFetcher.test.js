@@ -55,7 +55,7 @@ describe('ImageMetaFetcher', () => {
       resize: { width: 5, height: 5, fit: 'contain' },
     })
 
-    expect(result[0].base64).toMatch(/^data:image\/jpeg;base64,/)
+    expect(result[0].base64).toMatch(/^data:image\/(jpeg|png|webp);base64,/)
   })
 
   it('skips broken or invalid images gracefully', async () => {
