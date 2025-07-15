@@ -27,7 +27,10 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "format": "biome format --write .",
+    "lint": "biome lint --write .",
+    "check": "biome check --write ."
   },
   "keywords": [
     "image",
@@ -43,6 +46,9 @@
     "sharp": "^0.34.3"
   },
   "devDependencies": {
+    "@area44/biome-config": "^2.2.4",
+    "@biomejs/biome": "^2.1.1",
+    "@types/node": "^24.0.13",
     "vitest": "^3.2.4"
   },
   "engines": {

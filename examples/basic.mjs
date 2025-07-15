@@ -1,5 +1,5 @@
-import { ImageMetaFetcher } from '../index.js'
+import { ImageMetaFetcher } from "../index.js";
 
-const images = await ImageMetaFetcher('examples/assets/*.{jpg,png}')
+const images = await ImageMetaFetcher("examples/assets/*.{jpg,png}");
 
-console.log(images)
+console.log(images);
