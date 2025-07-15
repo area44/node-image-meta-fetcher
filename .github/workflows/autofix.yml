@@ -55,6 +55,11 @@ jobs:
           echo "PM_NAME=$PACKAGE_MANAGER" >> "$GITHUB_OUTPUT"
           echo "PM_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
 
+      - name: Print environment info
+        run: |
+          echo "Node version: $(node -v)"
+          echo "Package manager: ${{ steps.detect_pm.outputs.PM_NAME }}@${{ steps.detect_pm.outputs.PM_VERSION }}"
+
       - name: Setup PNPM
         if: ${{ steps.detect_pm.outputs.PM_NAME == 'pnpm' }}
         uses: pnpm/action-setup@v4
