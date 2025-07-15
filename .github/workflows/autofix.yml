@@ -1,104 +1,106 @@
 name: area44/autofix.ci
 description: Run autofix.ci
 
-runs:
-  using: "composite"
-  steps:
-    - name: Determine Node.js version
-      id: get_node_version
-      shell: bash
-      run: |
-        if [[ -f .nvmrc ]]; then
-          echo "NODE_VERSION=$(<.nvmrc)" >> "$GITHUB_OUTPUT"
-        elif [[ -f package.json ]]; then
-          NODE_VERSION=$(jq -er '.engines.node // empty' package.json || true)
-          echo "NODE_VERSION=${NODE_VERSION:-lts/*}" >> "$GITHUB_OUTPUT"
-        else
-          echo "NODE_VERSION=lts/*" >> "$GITHUB_OUTPUT"
-        fi
-
-    - name: Detect package manager
-      id: detect_pm
-      shell: bash
-      run: |
-        if [[ -f pnpm-lock.yaml ]]; then
-          PACKAGE_MANAGER="pnpm"; VERSION="latest"
-        elif [[ -f yarn.lock ]]; then
-          PACKAGE_MANAGER="yarn"; VERSION="latest"
-        elif [[ -f package-lock.json ]]; then
-          PACKAGE_MANAGER="npm"; VERSION="latest"
-        elif [[ -f bun.lock || -f bun.lockb ]]; then
-          PACKAGE_MANAGER="bun"; VERSION="latest"
-        elif [[ -f package.json ]]; then
-          RAW_PM=$(jq -r '.packageManager // empty' package.json)
-          if [[ -n "$RAW_PM" ]]; then
-            PACKAGE_MANAGER="${RAW_PM%%@*}"
-            VERSION="${RAW_PM#*@}"
-            [[ "$VERSION" == "$RAW_PM" ]] && VERSION="latest"
+jobs:
+  autofix:
+    name: Run autofix.ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine Node.js version
+        id: get_node_version
+        shell: bash
+        run: |
+          if [[ -f .nvmrc ]]; then
+            echo "NODE_VERSION=$(<.nvmrc)" >> "$GITHUB_OUTPUT"
+          elif [[ -f package.json ]]; then
+            NODE_VERSION=$(jq -er '.engines.node // empty' package.json || true)
+            echo "NODE_VERSION=${NODE_VERSION:-lts/*}" >> "$GITHUB_OUTPUT"
           else
-            echo "No lockfile or packageManager found"; exit 1
+            echo "NODE_VERSION=lts/*" >> "$GITHUB_OUTPUT"
           fi
-        else
-          echo "No lockfile or package.json found"; exit 1
-        fi
-        echo "PM_NAME=$PACKAGE_MANAGER" >> "$GITHUB_OUTPUT"
-        echo "PM_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-        echo "Detected package manager: $PACKAGE_MANAGER@$VERSION"
 
-    - name: Setup PNPM
-      if: ${{ steps.detect_pm.outputs.PM_NAME == 'pnpm' }}
-      uses: pnpm/action-setup@v4
-      with:
-        version: ${{ steps.detect_pm.outputs.PM_VERSION }}
+      - name: Detect package manager
+        id: detect_pm
+        shell: bash
+        run: |
+          if [[ -f pnpm-lock.yaml ]]; then
+            PACKAGE_MANAGER="pnpm"; VERSION="latest"
+          elif [[ -f yarn.lock ]]; then
+            PACKAGE_MANAGER="yarn"; VERSION="latest"
+          elif [[ -f package-lock.json ]]; then
+            PACKAGE_MANAGER="npm"; VERSION="latest"
+          elif [[ -f bun.lock || -f bun.lockb ]]; then
+            PACKAGE_MANAGER="bun"; VERSION="latest"
+          elif [[ -f package.json ]]; then
+            RAW_PM=$(jq -r '.packageManager // empty' package.json)
+            if [[ -n "$RAW_PM" ]]; then
+              PACKAGE_MANAGER="${RAW_PM%%@*}"
+              VERSION="${RAW_PM#*@}"
+              [[ "$VERSION" == "$RAW_PM" ]] && VERSION="latest"
+            else
+              echo "No lockfile or packageManager found"; exit 1
+            fi
+          else
+            echo "No lockfile or package.json found"; exit 1
+          fi
+          echo "PM_NAME=$PACKAGE_MANAGER" >> "$GITHUB_OUTPUT"
+          echo "PM_VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Detected package manager: $PACKAGE_MANAGER@$VERSION"
 
-    - name: Setup Bun
-      if: ${{ steps.detect_pm.outputs.PM_NAME == 'bun' }}
-      uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: ${{ steps.detect_pm.outputs.PM_VERSION }}
+      - name: Setup PNPM
+        if: ${{ steps.detect_pm.outputs.PM_NAME == 'pnpm' }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ steps.detect_pm.outputs.PM_VERSION }}
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ steps.get_node_version.outputs.NODE_VERSION }}
-        cache-dependency-path: |
-          **/package-lock.json
-          **/pnpm-lock.yaml
-          **/yarn.lock
-          **/bun.lockb
-          **/bun.lock
+      - name: Setup Bun
+        if: ${{ steps.detect_pm.outputs.PM_NAME == 'bun' }}
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ steps.detect_pm.outputs.PM_VERSION }}
 
-    - name: Cache dependencies
-      uses: actions/cache@v4
-      with:
-        path: |
-          node_modules
-          ~/.npm
-          ~/.pnpm-store
-          ~/.yarn/cache
-          ~/.bun/install/cache
-        key: ${{ runner.os }}-${{ steps.detect_pm.outputs.PM_NAME }}-${{ hashFiles('**/pnpm-lock.yaml', '**/yarn.lock', '**/package-lock.json', '**/bun.lock', '**/bun.lockb') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ steps.detect_pm.outputs.PM_NAME }}-
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.get_node_version.outputs.NODE_VERSION }}
+          cache-dependency-path: |
+            **/package-lock.json
+            **/pnpm-lock.yaml
+            **/yarn.lock
+            **/bun.lockb
+            **/bun.lock
 
-    - name: Install dependencies
-      shell: bash
-      run: |
-        case "${{ steps.detect_pm.outputs.PM_NAME }}" in
-          pnpm) pnpm install --no-frozen-lockfile ;;
-          yarn) yarn install ;;
-          bun)  bun install ;;
-          *)    npm install ;;
-        esac
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ~/.npm
+            ~/.pnpm-store
+            ~/.yarn/cache
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ steps.detect_pm.outputs.PM_NAME }}-${{ hashFiles('**/pnpm-lock.yaml', '**/yarn.lock', '**/package-lock.json', '**/bun.lock', '**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ steps.detect_pm.outputs.PM_NAME }}-
 
-    - name: Setup Biome CLI
-      uses: biomejs/setup-biome@v2
-      with:
-        version: latest
+      - name: Install dependencies
+        shell: bash
+        run: |
+          case "${{ steps.detect_pm.outputs.PM_NAME }}" in
+            pnpm) pnpm install --no-frozen-lockfile ;;
+            yarn) yarn install ;;
+            bun)  bun install ;;
+            *)    npm install ;;
+          esac
 
-    - name: Run Biome
-      shell: bash
-      run: biome check .
+      - name: Setup Biome CLI
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
 
-    - name: Run autofix.ci
-      uses: autofix-ci/action@v1
+      - name: Run Biome
+        shell: bash
+        run: biome check .
+
+      - name: Run autofix.ci
+        uses: autofix-ci/action@v1
