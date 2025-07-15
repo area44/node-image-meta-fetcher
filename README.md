@@ -1,28 +1,53 @@
-# Image Meta Fetcher
+# 📸 Image Meta Fetcher
 
-Image Meta Fetcher allows you to fetch metadata for images in a directory. It retrieves information such as the image width, height, and base64 encoded image data.
+**Image Meta Fetcher** extracts metadata from images in a directory — including width, height, and a lightweight base64-encoded preview.
 
-## Getting Started
+## 🚀 Getting Started
+
+Clone the repository and install dependencies:
 
 ```sh
 git clone https://github.com/AREA44/node-image-meta-fetcher
 cd node-image-meta-fetcher
 bun install
-```
+````
 
-After that, remove example images then copy your images into `images` folder and run:
+## 🖼️ Using the Example
+
+1. Replace the contents of the `images/` folder with your own images (`.jpg`, `.jpeg`, `.png`, `.webp`).
+2. Run the example script:
 
 ```sh
-bun run examples/ImageMetaFetcher.js
+bun run examples/basic.js
 ```
 
-You'll get an `images.json` in the `examples` directory. This file will contain an array of objects, where each object represents an image. The objects will have the following properties:
+3. This will output metadata in your terminal and optionally create a `images.json` file.
 
-- `src`: The path to the image file
-- `width`: The width of the image in pixels
-- `height`: The height of the image in pixels
-- `base64`: The base64 encoded image data
+## 📦 Output Format
 
-## License
+Each image is represented as an object with the following properties:
 
-Licensed under the [MIT License](./LICENSE).
+| Property | Description                                                |
+| -------- | ---------------------------------------------------------- |
+| `src`    | File name of the image                                     |
+| `width`  | Image width in pixels                                      |
+| `height` | Image height in pixels                                     |
+| `base64` | Base64-encoded image preview (resized to 10×10 by default) |
+
+## 🧪 Testing
+
+Run unit tests with:
+
+```sh
+bun run test
+```
+
+or with Vitest in watch mode:
+
+```sh
+bun run test:watch
+```
+
+## 📄 License
+
+MIT © [AREA44](https://github.com/area44)

@@ -2,27 +2,35 @@ name: CI
 
 on:
   push:
-    branches: main
+    branches: [main]
   pull_request:
-    branches: main
+    branches: [main]
 
 jobs:
   test:
-    name: Node.js v${{ matrix.nodejs }} (${{ matrix.os }})
+    name: Bun (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 3
     strategy:
       matrix:
-        nodejs: [20, 21]
         os: [ubuntu-latest, windows-latest, macOS-latest]
+
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-
 
       - name: Install dependencies
         run: bun install
