@@ -13,7 +13,6 @@ jobs:
     timeout-minutes: 3
     strategy:
       matrix:
-        nodejs: latest
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: Checkout your repository using git
