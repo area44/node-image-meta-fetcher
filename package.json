@@ -1,6 +1,6 @@
 {
   "name": "@area44/image-meta-fetcher",
-  "version": "23.9.28",
+  "version": "25.07.15",
   "private": true,
   "description": "Fetch metadata for images in a directory",
   "homepage": "https://github.com/area44/node-image-meta-fetcher#readme",
