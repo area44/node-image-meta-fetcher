@@ -2,17 +2,23 @@ import { describe, it, expect, beforeAll } from 'vitest'
 import { ImageMetaFetcher } from '../index.js'
 import { join } from 'path'
 
-const imageDir = join(process.cwd(), 'tests/fixtures')
+const imageDir = join('tests', 'fixtures').replace(/\\/g, '/')
+const globPattern = `${imageDir}/*.{jpg,jpeg,png,webp}`
 
 let images
 
 beforeAll(async () => {
-  images = await ImageMetaFetcher(`${imageDir}/*.{jpg,jpeg,png,webp}`)
+  images = await ImageMetaFetcher(globPattern)
 })
 
 describe('ImageMetaFetcher', () => {
   it('returns a non-empty array of image metadata', () => {
     expect(Array.isArray(images)).toBe(true)
+
+    if (images.length === 0) {
+      throw new Error('No valid images found in tests/fixtures.')
+    }
+
     expect(images.length).toBeGreaterThan(0)
   })
 
@@ -36,7 +42,7 @@ describe('ImageMetaFetcher', () => {
   })
 
   it('respects the sort: false option', async () => {
-    const unsorted = await ImageMetaFetcher(`${imageDir}/*.{jpg,jpeg,png}`, {
+    const unsorted = await ImageMetaFetcher(globPattern, {
       sort: false,
     })
 
@@ -45,7 +51,7 @@ describe('ImageMetaFetcher', () => {
   })
 
   it('resizes thumbnails to custom size when provided', async () => {
-    const result = await ImageMetaFetcher(`${imageDir}/*.jpg`, {
+    const result = await ImageMetaFetcher(globPattern, {
       resize: { width: 5, height: 5, fit: 'contain' },
     })
 
@@ -53,10 +59,7 @@ describe('ImageMetaFetcher', () => {
   })
 
   it('skips broken or invalid images gracefully', async () => {
-    const result = await ImageMetaFetcher(`${imageDir}/*.{jpg,png}`, {
-      sort: false,
-    })
-
+    const result = await ImageMetaFetcher(globPattern)
     const files = result.map(r => r.src)
     expect(files).not.toContain('broken.jpg')
   })

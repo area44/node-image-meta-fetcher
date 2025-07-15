@@ -9,7 +9,7 @@ export async function ImageMetaFetcher(pattern, options = {}) {
 
     const imagePromises = files.map(async (file) => {
       try {
-        const src = file.replace(/^.*[\\\/]/, '')
+        const src = file.replace(/^.*[\\/]/, '')
         const image = sharp(file)
         const metadata = await image.metadata()
         const { width, height, format } = metadata
