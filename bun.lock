@@ -8,7 +8,7 @@
         "sharp": "^0.34.3",
       },
       "devDependencies": {
-        "@area44/biome-config": "^2.2.4",
+        "@area44/biome-config": "^2.2.5",
         "@biomejs/biome": "^2.1.1",
         "vitest": "^3.2.4",
       },
