@@ -1,5 +1,5 @@
-import { join } from "node:path";
 import fs from "node:fs";
+import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { ImageMetaFetcher } from "../index.js";
 
@@ -32,7 +32,9 @@ describe("ImageMetaFetcher", () => {
       expect(typeof image.height).toBe("number");
       expect(typeof image.format).toBe("string");
 
-      expect(image.base64).toMatch(/^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/);
+      expect(image.base64).toMatch(
+        /^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/
+      );
     }
   });
 
@@ -56,7 +58,9 @@ describe("ImageMetaFetcher", () => {
     });
 
     it("respects the sort: false option", async () => {
-      const unsorted = await ImageMetaFetcher("unused-pattern", { sort: false });
+      const unsorted = await ImageMetaFetcher("unused-pattern", {
+        sort: false,
+      });
       const sorted = await ImageMetaFetcher("unused-pattern", { sort: true });
 
       const unsortedOrder = unsorted.map((img) => img.src);
@@ -72,7 +76,9 @@ describe("ImageMetaFetcher", () => {
       resize: { width: 5, height: 5, fit: "contain" },
     });
 
-    expect(result[0].base64).toMatch(/^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/);
+    expect(result[0].base64).toMatch(
+      /^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/
+    );
   });
 
   it("skips broken or invalid images gracefully", async () => {
@@ -80,7 +86,9 @@ describe("ImageMetaFetcher", () => {
     const hasBroken = fs.existsSync(brokenPath);
 
     if (!hasBroken) {
-      console.warn("⚠️ No 'broken.jpg' file found in test fixtures. Skipping test.");
+      console.warn(
+        "⚠️ No 'broken.jpg' file found in test fixtures. Skipping test."
+      );
       return;
     }
 
