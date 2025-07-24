@@ -50,10 +50,13 @@ describe("ImageMetaFetcher", () => {
     const unsortedOrder = resultUnsorted.map((img) => img.src);
 
     // They should not always be equal unless tinyglobby returned sorted results
-    const isActuallyDifferent = JSON.stringify(sortedOrder) !== JSON.stringify(unsortedOrder);
+    const isActuallyDifferent =
+      JSON.stringify(sortedOrder) !== JSON.stringify(unsortedOrder);
 
     if (!isActuallyDifferent) {
-      console.warn("⚠️ Underlying glob returned files in sorted order; test may be inconclusive.");
+      console.warn(
+        "⚠️ Underlying glob returned files in sorted order; test may be inconclusive."
+      );
     }
 
     expect(isActuallyDifferent).toBe(true);
