@@ -43,9 +43,20 @@ describe("ImageMetaFetcher", () => {
   });
 
   it("respects the sort: false option", async () => {
-    const unsorted = await ImageMetaFetcher(globPattern, { sort: false });
-    const sorted = [...unsorted].map((img) => img.src).sort();
-    expect(unsorted.map((i) => i.src)).not.toEqual(sorted);
+    const resultSorted = await ImageMetaFetcher(globPattern, { sort: true });
+    const resultUnsorted = await ImageMetaFetcher(globPattern, { sort: false });
+
+    const sortedOrder = resultSorted.map((img) => img.src);
+    const unsortedOrder = resultUnsorted.map((img) => img.src);
+
+    // They should not always be equal unless tinyglobby returned sorted results
+    const isActuallyDifferent = JSON.stringify(sortedOrder) !== JSON.stringify(unsortedOrder);
+
+    if (!isActuallyDifferent) {
+      console.warn("⚠️ Underlying glob returned files in sorted order; test may be inconclusive.");
+    }
+
+    expect(isActuallyDifferent).toBe(true);
   });
 
   it("resizes thumbnails to custom size when provided", async () => {
