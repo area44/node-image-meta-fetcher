@@ -37,7 +37,7 @@
     "image-dimensions",
     "base64",
     "sharp",
-    "glob",
+    "tinyglobby",
     "utility"
   ],
   "dependencies": {

@@ -103,13 +103,13 @@ ImageMetaFetcher(globPattern, options?)
 Run the full test suite:
 
 ```bash
-bun run test
+bun test
 ```
 
 Watch mode:
 
 ```bash
-bun run test:watch
+bun test:watch
 ```
 
 Tests cover:

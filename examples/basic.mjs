@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { ImageMetaFetcher } from "../index.js";
 
 async function main() {
@@ -22,8 +22,11 @@ async function main() {
       }))
     );
 
-    await writeFile("examples/images.json", JSON.stringify(images, null, 2));
-    console.log("\nMetadata saved to examples/images.json");
+    mkdirSync("examples/output", { recursive: true });
+    const outputPath = "examples/output/images.json";
+    writeFileSync(outputPath, JSON.stringify(images, null, 2));
+
+    console.log(`Image metadata saved to ${outputPath}`);
   } catch (err) {
     console.error("Failed to fetch image metadata:", err);
   }
