@@ -1,8 +1,9 @@
 import { join } from "node:path";
-import fs from "fs";
-import { beforeAll, describe, expect, it } from "vitest";
+import fs from "node:fs";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { ImageMetaFetcher } from "../index.js";
 
+// Replace with your actual image fixtures directory
 const imageDir = join("tests", "fixtures").replace(/\\/g, "/");
 const globPattern = `${imageDir}/*.{jpg,jpeg,png,webp}`;
 
@@ -31,9 +32,7 @@ describe("ImageMetaFetcher", () => {
       expect(typeof image.height).toBe("number");
       expect(typeof image.format).toBe("string");
 
-      expect(image.base64).toMatch(
-        /^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/
-      );
+      expect(image.base64).toMatch(/^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/);
     }
   });
 
@@ -42,24 +41,30 @@ describe("ImageMetaFetcher", () => {
     expect(images.map((i) => i.src)).toEqual(sorted);
   });
 
-  it("respects the sort: false option", async () => {
-    const resultSorted = await ImageMetaFetcher(globPattern, { sort: true });
-    const resultUnsorted = await ImageMetaFetcher(globPattern, { sort: false });
+  // 🧪 Mocked test for sort: false
+  describe("sort: false behavior (mocked)", () => {
+    vi.mock("tinyglobby", async () => {
+      const actual = await vi.importActual("tinyglobby");
 
-    const sortedOrder = resultSorted.map((img) => img.src);
-    const unsortedOrder = resultUnsorted.map((img) => img.src);
+      return {
+        ...actual,
+        glob: async () => [
+          join("tests/fixtures/b.jpg").replace(/\\/g, "/"),
+          join("tests/fixtures/a.png").replace(/\\/g, "/"),
+        ],
+      };
+    });
 
-    // They should not always be equal unless tinyglobby returned sorted results
-    const isActuallyDifferent =
-      JSON.stringify(sortedOrder) !== JSON.stringify(unsortedOrder);
+    it("respects the sort: false option", async () => {
+      const unsorted = await ImageMetaFetcher("unused-pattern", { sort: false });
+      const sorted = await ImageMetaFetcher("unused-pattern", { sort: true });
 
-    if (!isActuallyDifferent) {
-      console.warn(
-        "⚠️ Underlying glob returned files in sorted order; test may be inconclusive."
-      );
-    }
+      const unsortedOrder = unsorted.map((img) => img.src);
+      const sortedOrder = sorted.map((img) => img.src);
 
-    expect(isActuallyDifferent).toBe(true);
+      expect(unsortedOrder).not.toEqual(sortedOrder);
+      expect(sortedOrder).toEqual([...unsortedOrder].sort());
+    });
   });
 
   it("resizes thumbnails to custom size when provided", async () => {
@@ -67,18 +72,15 @@ describe("ImageMetaFetcher", () => {
       resize: { width: 5, height: 5, fit: "contain" },
     });
 
-    expect(result[0].base64).toMatch(
-      /^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/
-    );
+    expect(result[0].base64).toMatch(/^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/);
   });
 
   it("skips broken or invalid images gracefully", async () => {
-    // Ensure broken.jpg exists and is invalid (e.g., zero-byte file or non-image data)
     const brokenPath = join(imageDir, "broken.jpg").replace(/\\/g, "/");
     const hasBroken = fs.existsSync(brokenPath);
 
     if (!hasBroken) {
-      console.warn("⚠️ No 'broken.jpg' file found for this test.");
+      console.warn("⚠️ No 'broken.jpg' file found in test fixtures. Skipping test.");
       return;
     }
 
