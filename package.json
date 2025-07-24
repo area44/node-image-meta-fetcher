@@ -1,6 +1,6 @@
 {
   "name": "@area44/image-meta-fetcher",
-  "version": "25.07.16",
+  "version": "25.07.24",
   "private": true,
   "description": "Fetch metadata for images in a directory",
   "homepage": "https://github.com/area44/node-image-meta-fetcher#readme",
@@ -37,11 +37,11 @@
     "image-dimensions",
     "base64",
     "sharp",
-    "glob",
+    "tinyglobby",
     "utility"
   ],
   "dependencies": {
-    "glob": "^11.0.3",
+    "tinyglobby": "^0.2.14",
     "sharp": "^0.34.3"
   },
   "devDependencies": {
