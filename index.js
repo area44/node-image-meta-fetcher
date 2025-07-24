@@ -1,12 +1,12 @@
 import sharp from "sharp";
-import { glob } from "tinyglobby";
+import { glob, globSync } from "tinyglobby";
 
 export async function ImageMetaFetcher(pattern, options = {}) {
   const { resize = { width: 10, height: 10, fit: "inside" }, sort = true } =
     options;
 
   try {
-    const files = glob.sync(pattern, { posix: true });
+    const files = globSync(pattern, { posix: true });
 
     const imagePromises = files.map(async (file) => {
       try {
