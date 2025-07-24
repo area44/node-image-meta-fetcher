@@ -41,7 +41,7 @@
     "utility"
   ],
   "dependencies": {
-    "glob": "^11.0.3",
+    "tinyglobby": "^0.2.14",
     "sharp": "^0.34.3"
   },
   "devDependencies": {

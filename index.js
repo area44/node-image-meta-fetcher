@@ -1,4 +1,4 @@
-import { glob } from "glob";
+import { glob } from "tinyglobby";
 import sharp from "sharp";
 
 export async function ImageMetaFetcher(pattern, options = {}) {
