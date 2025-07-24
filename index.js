@@ -1,5 +1,5 @@
-import { glob } from "tinyglobby";
 import sharp from "sharp";
+import { glob } from "tinyglobby";
 
 export async function ImageMetaFetcher(pattern, options = {}) {
   const { resize = { width: 10, height: 10, fit: "inside" }, sort = true } =
