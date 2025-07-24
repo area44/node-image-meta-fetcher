@@ -4,7 +4,7 @@ import { glob } from "tinyglobby";
 
 /**
  * Fetch metadata and base64 previews for images matching a glob pattern.
- * 
+ *
  * @param {string|string[]} pattern - Glob pattern(s) for matching image files.
  * @param {object} options - Options for resizing and sorting.
  * @param {object} [options.resize={ width: 10, height: 10, fit: "inside" }] - Resize config for thumbnail.
@@ -12,15 +12,21 @@ import { glob } from "tinyglobby";
  * @returns {Promise<Array<{src: string, width: number, height: number, format: string, base64: string}>>}
  */
 export async function ImageMetaFetcher(pattern, options = {}) {
-  const {
-    resize = { width: 10, height: 10, fit: "inside" },
-    sort = true,
-  } = options;
+  const { resize = { width: 10, height: 10, fit: "inside" }, sort = true } =
+    options;
 
   try {
     const files = await glob(pattern, { posix: true });
 
-    const supportedFormats = ['jpeg', 'jpg', 'png', 'webp', 'gif', 'avif', 'tiff'];
+    const supportedFormats = [
+      "jpeg",
+      "jpg",
+      "png",
+      "webp",
+      "gif",
+      "avif",
+      "tiff",
+    ];
 
     const imagePromises = files.map(async (file) => {
       try {
@@ -30,7 +36,9 @@ export async function ImageMetaFetcher(pattern, options = {}) {
         const { width, height, format } = metadata;
 
         if (!supportedFormats.includes(format)) {
-          console.warn(`Skipped unsupported format "${format}" in file: ${file}`);
+          console.warn(
+            `Skipped unsupported format "${format}" in file: ${file}`
+          );
           return null;
         }
 

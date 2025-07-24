@@ -1,7 +1,7 @@
 import { join } from "node:path";
+import fs from "fs";
 import { beforeAll, describe, expect, it } from "vitest";
 import { ImageMetaFetcher } from "../index.js";
-import fs from "fs";
 
 const imageDir = join("tests", "fixtures").replace(/\\/g, "/");
 const globPattern = `${imageDir}/*.{jpg,jpeg,png,webp}`;
@@ -31,7 +31,9 @@ describe("ImageMetaFetcher", () => {
       expect(typeof image.height).toBe("number");
       expect(typeof image.format).toBe("string");
 
-      expect(image.base64).toMatch(/^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/);
+      expect(image.base64).toMatch(
+        /^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/
+      );
     }
   });
 
@@ -51,14 +53,16 @@ describe("ImageMetaFetcher", () => {
       resize: { width: 5, height: 5, fit: "contain" },
     });
 
-    expect(result[0].base64).toMatch(/^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/);
+    expect(result[0].base64).toMatch(
+      /^data:image\/(jpeg|png|webp|gif|avif|tiff);base64,/
+    );
   });
 
   it("skips broken or invalid images gracefully", async () => {
     // Ensure broken.jpg exists and is invalid (e.g., zero-byte file or non-image data)
     const brokenPath = join(imageDir, "broken.jpg").replace(/\\/g, "/");
     const hasBroken = fs.existsSync(brokenPath);
-    
+
     if (!hasBroken) {
       console.warn("⚠️ No 'broken.jpg' file found for this test.");
       return;
