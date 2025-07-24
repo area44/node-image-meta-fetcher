@@ -3,7 +3,6 @@ import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { ImageMetaFetcher } from "../index.js";
 
-// Replace with your actual image fixtures directory
 const imageDir = join("tests", "fixtures").replace(/\\/g, "/");
 const globPattern = `${imageDir}/*.{jpg,jpeg,png,webp}`;
 
@@ -43,7 +42,6 @@ describe("ImageMetaFetcher", () => {
     expect(images.map((i) => i.src)).toEqual(sorted);
   });
 
-  // 🧪 Mocked test for sort: false
   describe("sort: false behavior (mocked)", () => {
     vi.mock("tinyglobby", async () => {
       const actual = await vi.importActual("tinyglobby");
@@ -87,7 +85,7 @@ describe("ImageMetaFetcher", () => {
 
     if (!hasBroken) {
       console.warn(
-        "⚠️ No 'broken.jpg' file found in test fixtures. Skipping test."
+        "No 'broken.jpg' file found in test fixtures. Skipping test."
       );
       return;
     }
