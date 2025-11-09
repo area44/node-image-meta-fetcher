@@ -9,14 +9,14 @@
         "tinyglobby": "^0.2.15",
       },
       "devDependencies": {
-        "@area44/biome-config": "^2.3.1",
+        "@area44/biome-config": "^2.3.2",
         "@biomejs/biome": "^2.3.4",
         "vitest": "^4.0.8",
       },
     },
   },
   "packages": {
-    "@area44/biome-config": ["@area44/biome-config@2.3.1", "", {}, "sha512-8RhujZNoFtiJC4feDutU9SxWZbMHIhQ1q/k4hVkP873VT627t00T/w/MdDEsyLlO6OcCHp34BawS5drs3LeK4Q=="],
+    "@area44/biome-config": ["@area44/biome-config@2.3.2", "", {}, "sha512-hOpHnciPF/AgnPEfHITisZJZ0u/E+XW3R03lS7mMS3XpjaQuI+qmxS6KmpNOU+nBPtnUbmVyVZZ/7WlG0oaynw=="],
 
     "@biomejs/biome": ["@biomejs/biome@2.3.4", "", { "optionalDependencies": { "@biomejs/cli-darwin-arm64": "2.3.4", "@biomejs/cli-darwin-x64": "2.3.4", "@biomejs/cli-linux-arm64": "2.3.4", "@biomejs/cli-linux-arm64-musl": "2.3.4", "@biomejs/cli-linux-x64": "2.3.4", "@biomejs/cli-linux-x64-musl": "2.3.4", "@biomejs/cli-win32-arm64": "2.3.4", "@biomejs/cli-win32-x64": "2.3.4" }, "bin": { "biome": "bin/biome" } }, "sha512-TU08LXjBHdy0mEY9APtEtZdNQQijXUDSXR7IK1i45wgoPD5R0muK7s61QcFir6FpOj/RP1+YkPx5QJlycXUU3w=="],
 
