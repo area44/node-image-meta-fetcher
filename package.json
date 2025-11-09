@@ -42,12 +42,12 @@
   ],
   "dependencies": {
     "tinyglobby": "^0.2.15",
-    "sharp": "^0.34.4"
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@area44/biome-config": "^2.3.1",
-    "@biomejs/biome": "^2.3.2",
-    "vitest": "^4.0.6"
+    "@biomejs/biome": "^2.3.4",
+    "vitest": "^4.0.8"
   },
   "engines": {
     "node": ">=24.11.0"
