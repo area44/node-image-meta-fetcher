@@ -46,8 +46,8 @@
   },
   "devDependencies": {
     "@area44/biome-config": "^2.3.2",
-    "@biomejs/biome": "^2.3.5",
-    "vitest": "^4.0.9"
+    "@biomejs/biome": "^2.3.7",
+    "vitest": "^4.0.13"
   },
   "engines": {
     "node": ">=24.11.1"
